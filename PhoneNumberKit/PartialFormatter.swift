@@ -218,7 +218,11 @@ public final class PartialFormatter {
                     let nationalPrefixPattern = String(format: PhoneNumberPatterns.nationalPrefixParsingPattern, arguments: [nationalPrefix])
                     let matches = try regexManager?.matchedStringByRegex(nationalPrefixPattern, string: rawNumber)
                     if let m = matches?.first {
+                        if withPrefix {
                         startOfNationalNumber = m.count
+                        } else {
+                            startOfNationalNumber = m.count > 0 ? m.count - 1 : m.count
+                        }
                     }
                 }
             } catch {

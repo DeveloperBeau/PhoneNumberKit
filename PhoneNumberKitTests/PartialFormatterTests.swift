@@ -272,6 +272,31 @@ class PartialFormatterTests: XCTestCase {
         testNumber = "07739555555"
         XCTAssertEqual(partialFormatter.formatPartial(testNumber), "07739 555555")
     }
+    
+    // 07739555555
+    func testAUMobileNumber() {
+        let partialFormatter = PartialFormatter(phoneNumberKit: phoneNumberKit, defaultRegion: "AU")
+        var testNumber = "0"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0")
+        testNumber = "04"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "04")
+        testNumber = "044"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "044")
+        testNumber = "0447"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447")
+        testNumber = "04471"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 1")
+        testNumber = "044711"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 11")
+        testNumber = "0447111"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 111")
+        testNumber = "04471111"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 111 1")
+        testNumber = "044711111"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 111 11")
+        testNumber = "0447111111"
+        XCTAssertEqual(partialFormatter.formatPartial(testNumber), "0447 111 111")
+    }
 
     // 07739555555,9
     func testUKMobileNumberWithDigitsPausesAndWaits() {
